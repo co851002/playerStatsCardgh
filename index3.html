@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html class="no-js">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link type="text/css" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/skeleton/2.0.4/skeleton.min.css">
+    <link type="text/css" rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato">
+    <link type="text/css" rel="stylesheet" href="css/style.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/1.0.21/vue.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vue-resource/1.0.3/vue-resource.js"></script>
+</head>
+
+<body>
+
+    <div id="app" class="container">
+        <div class="row">
+            <div class="twelve columns">
+                <select class="u-full-width" v-model="character">
+            				<option value="" selected="selected">Select a Player...</option>
+            				<option v-for="person in characters" :value="person" selected>{{ person.player.name.first }} {{ person.player.name.last }}</option>
+            			</select>
+                <div class="infoContainer" v-if="character">
+                    <div class="imgProfile" :style="{ 'background-image': 'url(' + getProfileImg + ')' }"></div>
+                    <h3 v-if="show" class="">{{ character.player.name.first }} {{ character.player.name.last }}</h3>
+                    <h5 class="">{{ character.player.info.positionInfo }}</h5>
+                    <div class="badge team{{character.player.currentTeam.id}}" :style="{ 'background-image': 'url(' + badges + ')' }"></div>
+                    <ul>
+                        <li class="row"><span class="statName ">Appearances</span><span class="statVal "> {{ getAppearances }}</span></li>
+                        <li class="row"><span class="statName ">Goals</span><span class=" statVal ">{{ getGoals }}</span></li>
+                        <li class="row"><span class="statName ">Assists</span><span class="f statVal "> {{ getAssists }}</span></li>
+                        <li class="row"><span class="statName ">Goals per match</span><span class=" statVal "> {{ getGPM }}</span></li>
+                        <li class="row"><span class="statName ">Passes per minute</span><span class=" statVal ">{{ getPPM }}</span></li>
+                    </ul>
+
+                </div>
+            </div>
+
+            <div class="twelve columns json">
+                <pre>
+				<code>{{ $data | json }}</code>
+			</pre>
+            </div>
+        </div>
+    </div>
+
+
+    <script>
+        var apiURL = "data/player-stats.json";
+
+        var playerCard = new Vue({
+
+            el: '#app',
+            data: {
+                character: null,
+                characters: [],
+                statistic: null,
+                statistics: [],
+                show: true,
+                badges: 'assets/badges_sprite.png',
+                profileImg: 'assets/p{{character.player.id}}.png'
+            },
+            computed: {
+                getProfileImg: function() {
+                    // `this` points to the vm instance
+                    return 'assets/p' + this.character.player.id + '.png'
+                },
+                getGoals: function() {
+                    // `this` points to the vm instance
+                    return this.character.stats[0].value
+                },
+                getAppearances: function() {
+                    return this.character.stats[6].value
+                },
+                getAssists: function() {
+                    return this.character.stats[5].value
+                },
+                getGPM: function() {
+                    return ((this.character.stats[0].value) / (this.character.stats[6].value)).toFixed(2)
+                },
+                getPPM: function() {
+                    return (
+                        (
+                            (this.character.stats[4].value) + (this.character.stats[8].value)
+                        ) / (this.character.stats[8].value)
+                    ).toFixed(2);
+                }
+            },
+            ready: function() {
+                // When the application loads, we want to call the method that initializes some data
+                this.fetchData();
+            },
+            methods: {
+                fetchData: function() {
+                    this.$http({
+                        url: apiURL,
+                        method: 'GET'
+                    }).then(function(response, i) {
+                        this.$set('characters', response.data.players);
+                        this.$set('statistics', response.data.stats);
+                        console.log("Sucess");
+                        //console.log("Characters: " + response.data.players);
+                        //console.log("Statistics: " + response.data.players);
+                    }, function(response) {
+                        console.log("Error fetchData");
+                    });
+                },
+
+            }
+        });
+    </script>
+</body>
+
+</html>
