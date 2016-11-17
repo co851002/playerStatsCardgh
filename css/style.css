@@ -2,10 +2,14 @@ body {
 	font-family: 'Lato', sans-serif;
 	margin: 0;
 }
+div#titleBadge {
+    position: relative;
+    display: block;
+}
 li {
     list-style-type: none;
     background: #eaeaea;
-    padding: 10px;
+    padding: 0.5em;
     color: #38003c;
     margin: 2px 20px;
     box-shadow: 0px 0px 2px 0px rgba(0, 0, 0, 0.6);
@@ -19,6 +23,7 @@ div#app {
     width: 100%;
     margin: 0;
     max-width: 100%;
+    /* background: #e90052; */
 }
 
 select.u-full-width {
@@ -26,16 +31,19 @@ select.u-full-width {
 }
 
 li:first-child {
-    margin-top: 10px;
+    /* margin-top: 10px; */
 }
 h3 {
     font-size: 2.5rem;
     color: #fff;
-    position: absolute;
+    position: relative;
+    line-height: 1.5em;
     z-index: 9;
-    bottom: 290px;
-    width: 90%;
-    margin: 0 20px;
+    /* bottom: 290px; */
+    text-indent: 15px;
+    width: 100%;
+    margin: 0;
+    background: #e90052;
 }
 
 
@@ -44,20 +52,23 @@ h5 {
     color: #fff;
     margin: 0 auto;
     line-height: 28px;
-    position: absolute;
-    bottom: 260px;
+    position: relative;
+    /* bottom: 260px; */
     Z-INDEX: 9;
-    width: 90%;
-    margin: 0 20px;
+    text-indent: 15px;
+    width: 100%;
+    /* margin: 0 20px; */
+    background: #e90052;
 }
 
 ul {
     width: 100%;
     background: #e90052;
-    position: fixed;
-    bottom: 0;
+    position: relative;
+    /* bottom: 0; */
     margin: 0;
-    padding: 80px 0px 20px;
+    height: 60%;
+    padding: 10px 0px 10px;
 }
 
 .infoContainer {
@@ -65,9 +76,11 @@ ul {
     width: 100%;
     bottom: 0px;
     margin: 0 auto;
-    height: 100vh;
-    background: url("../assets/background_pattern.png")no-repeat 40% 0px;
-    background-size: 100% auto;
+    height: 90%;
+    overflow: scroll;
+    background: #fff url("../assets/background_pattern.png")no-repeat;
+    background-size: 70% auto;
+    background-position: 100% -17px;
 }
 .badge {
     width: 100px;
@@ -76,10 +89,11 @@ ul {
     border-radius: 104px;
     position: absolute;
     right: 20px;
-    bottom: 280px;
-    text-indent: -2000px;
+    top: -52px;
+    /* bottom: 280px; */
+    /* text-indent: -2000px; */
     background-size: auto;
-    z-index: 2;
+    z-index: 10;
 }
 
 select.u-full-width {
@@ -91,12 +105,14 @@ select.u-full-width {
     z-index: 9;
 }
 .imgProfile {
-    width: 220px;
-    height: 280px;
+    width: 170px;
+    height: 40%;
+    max-height: 190px;
     z-index: 1;
     margin-left: 10px;
-    bottom: 340px;
-    position: absolute;
+    /* bottom: 340px; */
+    background-size: 100% auto;
+    /* position: absolute; */
 }
 .imgProfile img {
     display: block;

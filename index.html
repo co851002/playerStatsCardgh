@@ -23,9 +23,11 @@
             			</select>
                 <div class="infoContainer" v-if="character">
                     <div class="imgProfile" :style="{ 'background-image': 'url(' + getProfileImg + ')' }"></div>
-                    <h3 v-if="show" class="">{{ character.player.name.first }} {{ character.player.name.last }}</h3>
-                    <h5 class="">{{ character.player.info.positionInfo }}</h5>
-                    <div class="badge team{{character.player.currentTeam.id}}" :style="{ 'background-image': 'url(' + badges + ')' }"></div>
+                    <div id="titleBadge">
+                      <h3 v-if="show" class="">{{ character.player.name.first }} {{ character.player.name.last }}</h3>
+                      <h5 class="">{{ character.player.info.positionInfo }}</h5>
+                      <div class="badge team{{character.player.currentTeam.id}}" :style="{ 'background-image': 'url(' + badges + ')' }"></div>
+                    </div>
                     <ul>
                         <li class="row"><span class="statName ">Appearances</span><span class="statVal "> {{ getAppearances }}</span></li>
                         <li class="row"><span class="statName ">Goals</span><span class=" statVal ">{{ getGoals }}</span></li>
