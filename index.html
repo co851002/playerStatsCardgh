@@ -23,7 +23,7 @@
             			</select>
                 <div class="infoContainer" v-if="character">
                     <div class="imgProfile" :style="{ 'background-image': 'url(' + getProfileImg + ')' }"></div>
-                    <div id="titleBadge">
+                    <div id="titleBadge" class="titleBadge">
                       <h3 v-if="show" class="">{{ character.player.name.first }} {{ character.player.name.last }}</h3>
                       <h5 class="">{{ character.player.info.positionInfo }}</h5>
                       <div class="badge team{{character.player.currentTeam.id}}" :style="{ 'background-image': 'url(' + badges + ')' }"></div>
